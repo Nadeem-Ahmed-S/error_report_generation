@@ -34,12 +34,28 @@ compile:
 
 	#make compile_py;
 
-clean_compile:
-	rm -rf work/ error_log_file.log
+simulate:
+	#mkdir $(test_folder)
 
-compile_py:
-	python error_report_generation.py
+	# Use -novopt for no optimization - Makes the simulation slower
+	# vsim -pli finesim.so -coverage top
+	vsim -vopt \
+	work.top \
+	-voptargs=+acc=npr \
+	-assertdebug \
+	+UVM_VERBOSITY=$(uvm_verbosity) \
+	-l simulate_log.log \
+	-sva \
+  -coverage \
+	-c -do " run -all; exit"
 
-#compile_err
-#compile_err:
-#	grep ^**Error
+
+clean:
+	rm -rf work/ error_log_file.log compile_log.log simulate_log.log vsim.wlf vish_stacktrace.vstf simulate_error_log.log
+
+py:
+	python error_report_generation.py $(type)
+
+#simulate_py:
+#	python error_report_generation.py $(type)
+
