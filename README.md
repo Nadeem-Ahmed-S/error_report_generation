@@ -5,4 +5,10 @@ A Python script to create a log file to capture the errors in compilation and si
 make compile
 
 # To compile and genrate a separate log for compilation errrors:
-make compile_py
+make py type="compile"
+
+# To simulate and genrate a log file for simulation:
+make simulate
+
+# To simulate and genrate a separate log for simulation errrors:
+make py type="simulate"
