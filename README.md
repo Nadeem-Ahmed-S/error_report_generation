@@ -13,7 +13,7 @@ make simulate
 # To simulate and genrate a separate log for simulation errrors:
 make run type="simulate"
 
-# Python commands to execute the compileation and simulation
+# Python commands to execute the compilation and simulation
 # To compile and genrate a separate log for compilation errrors:
 python error_report_generation compile
 
