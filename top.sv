@@ -6,13 +6,13 @@ module top;
 
     //a= 8'd19;
 
-    for(int i=0; i<7 i++) begin
+    for(int i=0; i<7; i++) begin
       q[i] = i + 5;
       //$display("q[%0d]=%0d",i,q[i]);
     end
 
     for(int i=0; i<17; i++) begin
-      $display("q[%0d]=%0d",i,a[i]);
+      $display("q[%0d]=%0d",i,q[i]);
     end
   
   end

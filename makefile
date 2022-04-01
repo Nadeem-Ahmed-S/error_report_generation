@@ -9,9 +9,9 @@
 
 usage:
 	echo "";
-	echo "--------------------------------------------";
-	echo "           Error File Generation            ";
-	echo "--------------------------------------------";
+	echo "-------------------------------------------------------------------------------------";
+	echo "           								Error File Generation Commands   													 ";
+	echo "-------------------------------------------------------------------------------------";
 	echo "";
 	echo "Use the below command for compilation:";
 	echo "make compile";
@@ -25,6 +25,8 @@ usage:
 	echo "Use the below command for compilation and to generate the error_log_file:";
 	echo "make run type="simulate"";
 	echo "";
+	echo "-------------------------------------------------------------------------------------";
+	echo "";
 
 #compile
 compile:
@@ -36,8 +38,7 @@ compile:
 	+cover   \
 	+fcover  \
 	-l compile_log.log \
-	top.sv;  
-	#-f file.f
+	-f file.f 
 
 	#make compile_py;
 
