@@ -5,6 +5,9 @@ import os
 #Used to store an argument passed from the makefile
 cmd_arg = sys.argv[1];
 
+#The below variable is protocol specific
+prot_name = ""
+
 #Variable : Pattern
 #Pattern that you want to search for
 if(cmd_arg == 'simulate'):
@@ -19,30 +22,39 @@ command = 'make ' + cmd_arg
 #The fubction that runs the command on the terminal
 os.system(command);
 
-def line_loop(arg,log_file,file_name):
+#This function is used to print error-lines in terminal and
+#to add the errors into the error_log file
+def write_into_error_file(pattern_arg,log_file,error_file):
   for line in log_file:
-    match = re.search(arg,line);
+    match = re.search(pattern_arg,line);
     if(match):
-      print("**-------------------------Error Report-------------------------**")
       print(line)
-      print("**--------------------------------------------------------------**")
-      count = count + 1;
-      with open(cmd_arg+"_error_log.log",'a') as file_name:
-        file_name.write(line)
-        file_name.close()
+      #if(os.path.exists(cmd_arg+"_error.log")):
+      with open(error_file,'a') as error_file_local:
+        error_file_local.write(line)
+        error_file_local.close()
 
 
-log_file = open(cmd_arg+"_log.log",'r');
+print("**-------------------------Error Report-------------------------**")
 
-file_name = cmd_arg + "_error_log"
+error_file = cmd_arg+"_error.log";
 
-count = 0;
-
-line_loop(pattern,log_file,file_name);
+#Opening the log file and passing it to the frunction and closing it.
+log_file = open(prot_name+cmd_arg+".log",'r');
+write_into_error_file(pattern,log_file,error_file);
 log_file.close();
 
-if(count != 0):
-  log_file = open(cmd_arg+"_log.log",'r');
-  line_loop("Errors",log_file,file_name);
-  log_file.close();
+#Opening the log file and passing it to the frunction and closing it.
+log_file = open(prot_name+cmd_arg+".log",'r');
+if(os.path.exists(cmd_arg+"_error.log")):
+  write_into_error_file("Errors",log_file,error_file);
+log_file.close();
+
+print("Log file path : "+prot_name+cmd_arg+".log");
+if(os.path.exists(cmd_arg+"_error.log")):
+  print("Error log file :" + error_file)
+
+print("**--------------------------------------------------------------**")
+
+
 

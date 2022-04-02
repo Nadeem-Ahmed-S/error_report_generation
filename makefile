@@ -37,7 +37,7 @@ compile:
 	+acc     \
 	+cover   \
 	+fcover  \
-	-l compile_log.log \
+	-l compile.log \
 	-f file.f 
 
 	#make compile_py;
@@ -52,17 +52,17 @@ simulate:
 	-voptargs=+acc=npr \
 	-assertdebug \
 	+UVM_VERBOSITY=$(uvm_verbosity) \
-	-l simulate_log.log \
+	-l simulate.log \
 	-sva \
   -coverage \
 	-c -do " run -all; exit"
 
 
 clean_compile:
-	rm -rf work/ compile_log.log compile_error_log.log
+	rm -rf work/ compile.log compile_error.log
 
 clean_simulate:
-	rm -rf work/ simulate_log.log vsim.wlf vish_stacktrace.vstf simulate_error_log.log
+	rm -rf work/ simulate.log vsim.wlf vish_stacktrace.vstf simulate_error.log
 
 clean:
 	make clean_compile;
