@@ -48,14 +48,20 @@ simulate:
 	# Use -novopt for no optimization - Makes the simulation slower
 	# vsim -pli finesim.so -coverage top
 	vsim -vopt \
-	work.top \
+	work.hvl_top \
+	work.hdl_top \
+	work.tb_master_assertions \
 	-voptargs=+acc=npr \
 	-assertdebug \
+	+UVM_TESTNAME=$(test) \
 	+UVM_VERBOSITY=$(uvm_verbosity) \
-	-l simulate.log \
+	-l $(test_folder)/$(test).log \
 	-sva \
   -coverage \
-	-c -do " run -all; exit"
+	-c -do "log -r /*; add wave -r /*; coverage save -onexit -assert -directive -cvg -codeAll $(test_folder)/$(test)_coverage.ucdb; run -all; exit" \
+	-wlf $(test_folder)/waveform.wlf
+
+
 
 
 clean_compile:
