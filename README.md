@@ -18,4 +18,4 @@ make run type="simulate"
 python error_report_generation.py compile
 
 # To simulate and genrate a separate log for simulation errrors:
-python error_report_generation.py simulate
+python error_report_generation.py simulate test_name uvm_verobisty
